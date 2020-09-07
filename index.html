@@ -1,0 +1,36 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>JS Quiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+  </head>
+  <body>
+    <div class="welcome" id="welcome">
+      <h2>Coding Quiz Challenge</h2>
+      <p>Try to answer the following code related questions within the time limit. Keep in mind that incorrect answers will penalise your score/time by 10 seconds!</p>
+      <button id="startQuiz">Start Quiz</button>
+    </div>
+    <div class="questions" id="questionsDiv">
+      <p>Question: <span id="questionText">0</span></p>
+      <ul id="answerList" style="list-style-type: none"></ul>
+      <p>Result: <span id="answerResult"></span></p>
+      <p>Score: <span id="score">100</span></p>
+    </div>
+    <form id="resultsForm" method="POST">
+      <h2>All Done!</h2>
+      <p>Your final score is: <span id="finalScore">0</span></p>
+      <label for="initialsText">Enter your initials:</label>
+      <input type="text" name="initialsText" id="initialsText" />
+      <!-- <a href="highscores.html"><button id="submitScore">Submit</button></a> -->
+      <a class="nav-link" href="contact.html"><button id="submitScore">Submit</button></a>
+    </form>
+
+    <script src="questions.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

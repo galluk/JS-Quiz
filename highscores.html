@@ -7,17 +7,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>High SCores</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 
-</head>
-<body>
-    <div class="scores">
-        <h3>High Scores</h3>
-        <ul id="scoresList" style="list-style-type:none;"></ul>
+    <!-- Bring in the bootstrap CSS via the Bootstrap CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- empty row -->
+      <div class="rowFiller">
+        <div class="col-md-12">
+          <br />
+          <br />
+        </div>
+      </div>
+
+      <!-- high scores row -->
+      <div class="row" id="rwContentArea">
+        <!-- only 1 row -->
+        <div class="col-md-4"></div>
+        <div class="col-md-4 scores">
+          <h3>High Scores</h3>
+          <ul id="scoresList" style="list-style-type: none"></ul>
+          <button class="btn btn-primary" id="goBack">Go Back</button>
+          <button class="btn btn-primary" id="clearScores">Clear High Scores</button>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
     </div>
-    <button id="goBack">Go Back</button>
-    <button id="clearScores">Clear High Scores</button>
-    
     <script src="scores.js"></script>
   </body>
 </html>

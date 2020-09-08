@@ -1,0 +1,43 @@
+/** @format */
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: purple;
+}
+
+.navbar-item {
+  color: purple;
+}
+
+.button,
+.btn-primary {
+  background-color: purple;
+  border-color: purple;
+  color: white;
+  margin: 2px;
+  padding: 3px 6px;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
+  background-color: rgb(150, 90, 150) !important;
+  border-color: rgb(150, 90, 150) !important;
+}
+
+#welcome,
+#startQuiz,
+#resultsForm {
+  text-align: center;
+}
+
+/******************************* High scores page **************************/
+.scores {
+  text-align: center;
+}
+
+#scoresList {
+  padding: 5px;
+}

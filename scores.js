@@ -32,7 +32,7 @@ function showHighScores() {
     for (var i = 0; i < highScores.length; i++) {
         // add item to the list
         var li = document.createElement("li");
-        li.textContent = i + 1 + " - " + highScores[i].initials + " : " + highScores[i].score;
+        li.textContent = i + 1 + ". " + highScores[i].initials + " - " + highScores[i].score;
         listScores.appendChild(li);
     }
 } // showHighScores

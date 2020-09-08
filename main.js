@@ -1,12 +1,13 @@
+var welcomeEl = document.querySelector("#welcome");
+var btnStartQuiz = document.querySelector("#startQuiz");
 var txtQuestions = document.querySelector("#questionText");
+var questionsEl = document.querySelector("#questionsDiv");
 var listAnswers = document.querySelector("#answerList");
 var txtResult = document.querySelector("#answerResult");
 var txtScore = document.querySelector("#score");
-var btnSubmitScore = document.querySelector("#submitScore");
+var resultsEl = document.querySelector("#resultsDiv");
 var txtInitials = document.querySelector("#initialsText");
-var btnStartQuiz = document.querySelector("#startQuiz");
-var questionsEl = document.querySelector("#questionsDiv");
-var welcomeEl = document.querySelector("#welcome");
+var btnSubmitScore = document.querySelector("#submitScore");
 var frmResults = document.querySelector("#resultsForm");
 var txtFinalScore = document.querySelector("#finalScore");
 
@@ -20,6 +21,7 @@ var interval; // the quiz timer
 
 function initialise() {
     questionsEl.style.display = "none";
+    resultsEl.style.display = "none";
     frmResults.style.display = "none";
 }
 
@@ -50,22 +52,22 @@ function renderQuestion(questionIndex) {
         question = questionsArray[questionIndex];
 
         currentAnswer = question.answerId;
-        txtQuestions.textContent = question.questionText;
+        txtQuestions.textContent = (questionIndex + 1) + ": " + question.questionText;
 
         // Render a new li for each answer
         for (var i = 0; i < question.answers.length; i++) {
 
             var li = document.createElement("li");
-            //li.textContent = question.answers[i];
+            // set the answerIndex attribute to check for correct answer
             li.setAttribute("answerIndex", i);
 
-            var button = document.createElement("button");
+            var button = document.createElement("btn");
             button.textContent = question.answers[i];
+            button.setAttribute("class", "btn btn-primary");
 
             li.appendChild(button);
             listAnswers.appendChild(li);
         }
-
     }
     else {
         // at end of array so finish the quiz
@@ -88,31 +90,33 @@ function answerQuestion(event) {
     var element = event.target;
 
     // check a button was clicked
-    if (element.matches("button") === true) {
+    if (element.matches("btn") === true) {
 
         // handle the user's answer  
         var answer = element.parentElement.getAttribute("answerIndex");
 
         if (answer == currentAnswer) {
-            answerResult.textContent = "Correct!!";
+            txtResult.textContent = "Correct!!";
         }
         else {
-            answerResult.textContent = "Wrong!!";
+            txtResult.textContent = "Wrong!!";
         }
+        resultsEl.style.display = "block";
+
+        // update score
+        updateScore(answer == currentAnswer);
+
+        // move on to next question
+        currentQuestionIndex++;
+        renderQuestion(currentQuestionIndex);
     } // if
-
-    // update score
-    updateScore(answer == currentAnswer);
-
-    // move on to next question
-    currentQuestionIndex++;
-    renderQuestion(currentQuestionIndex);
 } // answerQuestion
 
 function startQuiz() {
     // hide welcome and show the questions
     welcomeEl.style.display = "none";
     questionsEl.style.display = "block";
+    resultsEl.style.display = "none";
 
     // reset the score and questions
     score = STARTING_SCORE;

@@ -7,28 +7,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>JS Quiz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bring in the bootstrap CSS via the Bootstrap CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
   </head>
   <body>
-    <div class="welcome" id="welcome">
-      <h2>Coding Quiz Challenge</h2>
-      <p>Try to answer the following code related questions within the time limit. Keep in mind that incorrect answers will penalise your score/time by 10 seconds!</p>
-      <button id="startQuiz">Start Quiz</button>
+    <!-- Container Div -->
+    <div class="container">
+      
+      <!-- set up nav bar for highscores link and current score -->
+      <nav class="navbar">
+        <a href="highscores.html"><div class="navbar-item">View High Scores</div></a>
+        <span class="navbar-text">Time: <span id="score"></span></span>
+      </nav>
+      <!-- heading row -->
+      <div class="row" id="rwContentArea">
+        <!-- only 1 row -->
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="welcome" id="welcome">
+            <h2>Coding Quiz Challenge</h2>
+            <br />
+            <h6>Try to answer the following code related questions within the time limit. Keep in mind that incorrect answers will penalise your score/time by 10 seconds!</h6>
+            <br />
+            <button class="btn btn-primary" id="startQuiz">Start Quiz</button>
+          </div>
+          <div class="questions" id="questionsDiv">
+            <h4>Question <span id="questionText">0</span></h4>
+            <ul id="answerList" style="list-style-type: none"></ul>
+          </div>
+          <form id="resultsForm" method="POST">
+            <h2>All Done!</h2>
+            <p>Your final score is: <span id="finalScore">0</span></p>
+            <label for="initialsText">Enter your initials:</label>
+            <input type="text" name="initialsText" id="initialsText" />
+            <button class="btn btn-primary" id="submitScore">Submit</button>
+          </form>
+          <div class="result" id="resultsDiv">
+            <hr />
+            <p><span id="answerResult"></span></p>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
     </div>
-    <div class="questions" id="questionsDiv">
-      <p>Question: <span id="questionText">0</span></p>
-      <ul id="answerList" style="list-style-type: none"></ul>
-      <p>Result: <span id="answerResult"></span></p>
-      <p>Score: <span id="score">100</span></p>
-    </div>
-    <form id="resultsForm" method="POST" >
-      <h2>All Done!</h2>
-      <p>Your final score is: <span id="finalScore">0</span></p>
-      <label for="initialsText">Enter your initials:</label>
-      <input type="text" name="initialsText" id="initialsText" />
-      <!-- <a href="highscores.html"><button id="submitScore">Submit</button></a> -->
-      <button id="submitScore">Submit</button>
-    </form>
+    <!-- container -->
 
     <script src="questions.js"></script>
     <script src="main.js"></script>

@@ -139,12 +139,14 @@ function saveScore() {
 }
 
 function submitScore(event) {
+    event.preventDefault();
+
+    // set property of the high score
     var highScore = {
         initials: txtInitials.value.trim(),
         score: score
     }
 
-    //highScore.initials = txtInitials.value.trim();
     // Return from function early if submitted initials are blank
     if (highScore.initials === "") {
         return;
@@ -159,21 +161,20 @@ function submitScore(event) {
     }
 
     // add the submitted initials and score of current quiz to high scores
-    //highScore.score = score;
     highScores.push(highScore);
 
     // save the new highscores
     localStorage.setItem("highscores", JSON.stringify(highScores));
 
-    window.open("highscores.html", "_blank");
-    // window.location.href = "highscores.html";
-    // window.location.reload(true);
+    // and go to the highscores page
+    window.location.href = "highscores.html";
 }
 
 initialise();
 
 // when an Answer button is clicked
 listAnswers.addEventListener("click", answerQuestion);
+frmResults.addEventListener("submit", submitScore);
 //btnSubmitScore.addEventListener("click", submitScore);
 //btnSubmitScore.addEventListener("click", function (event) {window.open("highscores.html", "_self");});
 btnStartQuiz.addEventListener("click", startQuiz);

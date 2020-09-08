@@ -3,7 +3,7 @@ var btnClearScores = document.querySelector("#clearScores");
 var btnBack = document.querySelector("#goBack");
 
 function showHighScores() {
-    // get high scores from storage
+    // get high scores from storage into local array
     var highScores = [];
     var storedHighScores = localStorage.getItem("highscores");
 
@@ -19,7 +19,7 @@ function showHighScores() {
     for (var i = 0; i < highScores.length; i++) {
         // add item to the list
         var li = document.createElement("li");
-        li.textContent = i+1 + "   " + highScores[i].initials + " : " + highScores[i].score;
+        li.textContent = i+1 + " - " + highScores[i].initials + " : " + highScores[i].score;
         listScores.appendChild(li);
     }
 }
@@ -33,6 +33,8 @@ function clearHighScores(event) {
 // show the scores on the load of page
 showHighScores();
 
+// allow user to clear high scores
 btnClearScores.addEventListener("click", clearHighScores);
+// go back to main page on click of back button
 btnBack.addEventListener("click", function (event) {
     window.open("index.html", "_self"); });

@@ -38,6 +38,12 @@ function updateTimer() {
     }
 } //updateTimer
 
+// timing function to show the result of the previous question for i sec
+function updateResultTimer() {
+    resultsEl.style.display = "none";
+    clearInterval(resultInterval);
+} //updateResultTimer
+
 function startTimer() {
     interval = setInterval(updateTimer, 1000);
 }
@@ -102,7 +108,9 @@ function answerQuestion(event) {
         else {
             txtResult.textContent = "Wrong!!";
         }
+        // show the result for one second
         resultsEl.style.display = "block";
+        resultInterval = setInterval(updateResultTimer, 1000);
 
         // update score
         updateScore(answer == currentAnswer);
@@ -117,8 +125,8 @@ function startQuiz() {
     // hide welcome and show the questions
     welcomeEl.style.display = "none";
     questionsEl.style.display = "block";
-    resultsEl.style.display = "none";
 
+    
     // reset the score and questions
     score = STARTING_SCORE;
     currentQuestionIndex = 0;
@@ -147,16 +155,16 @@ function submitScore(event) {
     var highScore = {
         initials: txtInitials.value.trim(),
         score: score
-    }    
-    
+    }
+
     // Return from function early if submitted initials are blank
     if (highScore.initials === "") {
         alert("Please enter valid initials to save your score.");
         // put cursor back in the input box
         txtInitials.focus();
         return;
-    }    
-    
+    }
+
     // get the highscores from storage
     var highScores = [];
     var storedHighScores = localStorage.getItem(SCORES_STORAGE_NAME);
@@ -175,6 +183,7 @@ function submitScore(event) {
     window.location.href = "highscores.html";
 }
 
+// initialise page/quiz on show
 initialise();
 
 btnStartQuiz.addEventListener("click", startQuiz);

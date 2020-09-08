@@ -18,6 +18,7 @@ var currentAnswer; // the id of the answer to the current question
 var currentQuestionIndex = 0;
 var score = STARTING_SCORE;
 var interval; // the quiz timer
+var resultInterval; // timer for showing the result (for one sec)
 
 function initialise() {
     questionsEl.style.display = "none";
@@ -138,37 +139,37 @@ function finishQuiz() {
     clearInterval(interval);
 } // finishQuiz
 
-function saveScore() {
-    localStorage.setItem('todos', JSON.stringify(todos));
-}
-
 function submitScore(event) {
+    // we want to go to the highscores page so need to preventDefault
     event.preventDefault();
 
     // set property of the high score
     var highScore = {
         initials: txtInitials.value.trim(),
         score: score
-    }
-
+    }    
+    
     // Return from function early if submitted initials are blank
     if (highScore.initials === "") {
+        alert("Please enter valid initials to save your score.");
+        // put cursor back in the input box
+        txtInitials.focus();
         return;
-    }
-
+    }    
+    
     // get the highscores from storage
     var highScores = [];
-    var storedHighScores = localStorage.getItem("highscores");
+    var storedHighScores = localStorage.getItem(SCORES_STORAGE_NAME);
 
     if (storedHighScores) {
         highScores = JSON.parse(storedHighScores);
     }
 
-    // add the submitted initials and score of current quiz to high scores
+    // add the new score to high scores
     highScores.push(highScore);
 
     // save the new highscores
-    localStorage.setItem("highscores", JSON.stringify(highScores));
+    localStorage.setItem(SCORES_STORAGE_NAME, JSON.stringify(highScores));
 
     // and go to the highscores page
     window.location.href = "highscores.html";
@@ -176,9 +177,6 @@ function submitScore(event) {
 
 initialise();
 
-// when an Answer button is clicked
+btnStartQuiz.addEventListener("click", startQuiz);
 listAnswers.addEventListener("click", answerQuestion);
 frmResults.addEventListener("submit", submitScore);
-//btnSubmitScore.addEventListener("click", submitScore);
-//btnSubmitScore.addEventListener("click", function (event) {window.open("highscores.html", "_self");});
-btnStartQuiz.addEventListener("click", startQuiz);

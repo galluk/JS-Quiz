@@ -5,7 +5,7 @@ var btnBack = document.querySelector("#goBack");
 function showHighScores() {
     // get high scores from storage into local array
     var highScores = [];
-    var storedHighScores = localStorage.getItem("highscores");
+    var storedHighScores = localStorage.getItem(SCORES_STORAGE_NAME);
 
     if (storedHighScores) {
         highScores = JSON.parse(storedHighScores);
@@ -38,7 +38,9 @@ function showHighScores() {
 } // showHighScores
 
 function clearHighScores(event) {
-    localStorage.removeItem("highscores");
+    localStorage.removeItem(SCORES_STORAGE_NAME);
+    // remove focus from the button
+    document.activeElement.blur();
     // refresh display
     showHighScores();
 } // clearHighScores

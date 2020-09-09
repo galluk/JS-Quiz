@@ -17,9 +17,9 @@ The requirement involved asking 5 multiple choice questions on JavaScript, with 
 * [VScode](https://code.visualstudio.com/) - The editor of choice
 
 #### Initial interface
-![Screenshot of Home page](https://github.com/galluk/JS-Quiz/blob/master/homepage.jpg)
-![The Quiz in action](https://github.com/galluk/JS-Quiz/blob/master/question.jpg)
-![Legends of the Quiz](https://github.com/galluk/JS-Quiz/blob/master/highscores.jpg)
+![Screenshot of Home page](https://github.com/galluk/JS-Quiz/blob/master/Assets/images/homepage.jpg)
+![The Quiz in action](https://github.com/galluk/JS-Quiz/blob/master/Assets/images/question.jpg)
+![Legends of the Quiz](https://github.com/galluk/JS-Quiz/blob/master/Assets/images/highscores.jpg)
 
 <hr>
 
@@ -32,7 +32,7 @@ Allow users to delete individual high scores.
 GNU General Public License v3.0
 
 ### Link to the App
-<a href="https://galluk.github.io/JS-Quiz/index.html">The JS Quiz</a><hr>
+<a href="https://galluk.github.io/JS-Quiz/Develop/index.html">The JS Quiz</a><hr>
 <hr>
 
 ## Authors

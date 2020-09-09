@@ -21,6 +21,7 @@ var interval; // the quiz timer
 var resultInterval; // timer for showing the result (for one sec)
 
 function initialise() {
+    welcomeEl.style.display = "block";
     questionsEl.style.display = "none";
     resultsEl.style.display = "none";
     frmResults.style.display = "none";
@@ -38,7 +39,7 @@ function updateTimer() {
     }
 } //updateTimer
 
-// timing function to show the result of the previous question for i sec
+// timing function to show the result of the previous question for 1 sec
 function updateResultTimer() {
     resultsEl.style.display = "none";
     clearInterval(resultInterval);
@@ -58,7 +59,9 @@ function renderQuestion(questionIndex) {
         // get the current question
         question = questionsArray[questionIndex];
 
+        // get the correct answer id for this question
         currentAnswer = question.answerId;
+        // update question text
         txtQuestions.textContent = (questionIndex + 1) + ": " + question.questionText;
 
         // Render a new li for each answer
@@ -68,11 +71,13 @@ function renderQuestion(questionIndex) {
             // set the answerIndex attribute to check for correct answer
             li.setAttribute("answerIndex", i);
 
+            // create button and add it to the list
             var button = document.createElement("btn");
             button.textContent = question.answers[i];
             button.setAttribute("class", "btn btn-primary");
-
             li.appendChild(button);
+
+            // and add list item to the list
             listAnswers.appendChild(li);
         }
     }
@@ -84,8 +89,9 @@ function renderQuestion(questionIndex) {
 
 // update the score
 function updateScore(answerResult) {
+    // deduct 10 sec penalty if the user gave the wrong answer
     if (answerResult === false) {
-        score = score - WRONG_ANSWER_PTS;
+        score -= WRONG_ANSWER_PTS;
     }
     // display the new score
     txtScore.textContent = score;
@@ -125,7 +131,6 @@ function startQuiz() {
     // hide welcome and show the questions
     welcomeEl.style.display = "none";
     questionsEl.style.display = "block";
-
     
     // reset the score and questions
     score = STARTING_SCORE;
@@ -138,20 +143,22 @@ function startQuiz() {
 
 // finish off the quiz
 function finishQuiz() {
-    // hide questions and show score submit
+    // stop the timer
+    clearInterval(interval);
+    
+    // hide questions and show score submit form
     questionsEl.style.display = "none";
     frmResults.style.display = "block";
 
     txtFinalScore.textContent = score;
-    // stop the timer
-    clearInterval(interval);
 } // finishQuiz
 
+// add uer's score to the high scores lit, then show the page containing the list
 function submitScore(event) {
     // we want to go to the highscores page so need to preventDefault
     event.preventDefault();
 
-    // set property of the high score
+    // set properties of the high score
     var highScore = {
         initials: txtInitials.value.trim(),
         score: score
@@ -160,15 +167,16 @@ function submitScore(event) {
     // Return from function early if submitted initials are blank
     if (highScore.initials === "") {
         alert("Please enter valid initials to save your score.");
-        // put cursor back in the input box
+
+        // put cursor back in the input box so the user can re-enter
         txtInitials.focus();
+
         return;
     }
 
     // get the highscores from storage
     var highScores = [];
     var storedHighScores = localStorage.getItem(SCORES_STORAGE_NAME);
-
     if (storedHighScores) {
         highScores = JSON.parse(storedHighScores);
     }
@@ -186,6 +194,7 @@ function submitScore(event) {
 // initialise page/quiz on show
 initialise();
 
+// hook up required listeners
 btnStartQuiz.addEventListener("click", startQuiz);
 listAnswers.addEventListener("click", answerQuestion);
 frmResults.addEventListener("submit", submitScore);

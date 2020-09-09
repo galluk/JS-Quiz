@@ -13,12 +13,12 @@ function showHighScores() {
 
     // sort the scores from highest to lowest
     highScores.sort(function (a, b) {
-        // if scores are level sort by alpabetical order
+        // if scores are level sort by alphabetical order
         if (a.score === b.score) {
             var aInitials = a.initials.toLowerCase();
             var bInitials = b.initials.toLowerCase();
-            if (aInitials < bInitials) {return -1};
-            if (aInitials > bInitials) {return 1};
+            if (aInitials < bInitials) { return -1 };
+            if (aInitials > bInitials) { return 1 };
             // if we get to here they are the same
             return 0;
         }
@@ -29,11 +29,20 @@ function showHighScores() {
 
     // add the scores to the list on the page
     listScores.innerHTML = "";
-    for (var i = 0; i < highScores.length; i++) {
-        // add item to the list
+    // notify user if there are no scores
+    if (highScores.length === 0) {
         var li = document.createElement("li");
-        li.textContent = i + 1 + ". " + highScores[i].initials + " - " + highScores[i].score;
+        li.textContent = "There are no high scores recorded.";
         listScores.appendChild(li);
+    }
+    else {
+        // add the scores loaded from storage
+        for (var i = 0; i < highScores.length; i++) {
+            // add item to the list
+            var li = document.createElement("li");
+            li.textContent = (i + 1) + ". " + highScores[i].initials + " - " + highScores[i].score;
+            listScores.appendChild(li);
+        }
     }
 } // showHighScores
 
